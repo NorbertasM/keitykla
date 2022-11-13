@@ -1,0 +1,36 @@
+<div class="card">
+  <div class="card-header">
+    Valiutų kursai
+  </div>
+  <div class="card-body">
+    <div *ngIf="!loading && !error">
+      {{ course }}
+    </div>
+    <div *ngIf="loading" class="alert alert-info">
+      Kraunama...
+    </div>
+    <div *ngIf="error" class="alert alert-danger">
+      Error!
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-2 mb-3">
+        <div class="form-group">
+          <label for="from"  class="mb-1">Iš</label>
+          <select class="form-control" id="from" [(ngModel)]="from">
+            <option *ngFor="let c of currencies" [value]="c.value">{{ c.label }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-2 mb-3">
+        <div class="form-group">
+        <label for="to" class="mb-1" >Į</label>
+        <select class="form-control" id="to" [(ngModel)]="to">
+          <option *ngFor="let c of currencies" [value]="c.value">{{ c.label }}</option>
+        </select>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-success"  [disabled]="loading || !from || !to" (click)="onClickRefresh()">Užklausti</button>
+  </div>
+</div>
